@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
+import { useAuth } from "../../hooks/useAuth";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
+    // console.log(process.env); фишка для получение данных объекта
+    const history = useHistory();
     const [data, setData] = useState({
         email: "",
         password: "",
         stayOn: false
     });
+    const { singIn } = useAuth();
     const [errors, setErrors] = useState({});
     const handleChange = (target) => {
         setData((prevState) => ({
@@ -56,6 +61,8 @@ const LoginForm = () => {
         const isValid = validate();
         if (!isValid) return;
         console.log(data);
+        singIn(data);
+        history.push("/");
     };
     return (
         <form onSubmit={handleSubmit}>

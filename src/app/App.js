@@ -7,11 +7,13 @@ import Main from "./layouts/main";
 import NavBar from "./components/ui/navBar";
 import { ProfessionProvider } from "./hooks/useProfession";
 import { QualitiesProvider } from "./hooks/useQualities";
+import AuthProvider from "./hooks/useAuth";
 
 function App() {
     return (
         <div>
-            <NavBar />
+            <AuthProvider>
+                <NavBar />
                 <QualitiesProvider>
                     <ProfessionProvider>
                         <Switch>
@@ -25,6 +27,7 @@ function App() {
                         </Switch>
                     </ProfessionProvider>
                 </QualitiesProvider>
+            </AuthProvider>
             <ToastContainer />
         </div>
     );
